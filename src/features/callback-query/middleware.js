@@ -1,11 +1,16 @@
 import { showRobot } from '@/views/robot.js'
 import { showArena } from '@/views/arena.js'
 import { showSoftware } from '@/views/software.js'
+import { showEnterName } from '@/views/enter-name.js'
 import { showModules } from '@/views/install-module.js'
 
 export const useCallbackQuery = bot => {
   bot.on('callback_query:data', ctx => {
     switch (ctx.callbackQuery.data) {
+      // enter name
+      case 'name':
+        return showEnterName(ctx)
+
       // robot
       case 'back':
       case 'cancel':
