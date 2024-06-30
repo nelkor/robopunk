@@ -5,8 +5,8 @@ import { spamControlSessionEntries } from '@/features/spam-control'
 const initial = () => ({
   name: '',
   modules: [],
-  software: 1,
   arenaMessageId: 0,
+  software: 'optimal',
   nameEnterInProgress: false,
   ...spamControlSessionEntries,
 })
