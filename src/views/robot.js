@@ -9,8 +9,10 @@ const inlineKeyboard = new InlineKeyboard()
 
 const header = 'Карапузик 🤖'
 
-const text =
-  'Это ваш робот.\nПоменяйте в нём что-нибудь или отправьте на арену сражений.'
+const text = [
+  'Это ваш робот.',
+  'Поменяйте в нём что-нибудь или отправьте на арену сражений.',
+].join('\n')
 
 export const handleRobot = bot => {
   bot.chatType('private').command('robot', ctx => {
@@ -18,5 +20,12 @@ export const handleRobot = bot => {
       parse_mode: 'HTML',
       reply_markup: inlineKeyboard,
     })
+  })
+}
+
+export const showRobot = ctx => {
+  ctx.editMessageText(`<b>${header}</b>\n\n${text}`, {
+    parse_mode: 'HTML',
+    reply_markup: inlineKeyboard,
   })
 }

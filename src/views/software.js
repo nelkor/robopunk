@@ -1,12 +1,5 @@
 import { InlineKeyboard } from 'grammy'
 
-const inlineKeyboard = new InlineKeyboard()
-  .text('🤬 Агрессивный', 'aggressive')
-  .text('😏 Оптимальный ✔️', 'optimal')
-  .row()
-  .text('😐 Осторожный', 'careful')
-  .text('◀️ Назад', 'back')
-
 const header = 'Программное обеспечение 💾'
 
 const text = [
@@ -14,11 +7,30 @@ const text = [
   'чтобы изменить стиль боя вашего робота.',
 ].join(' ')
 
-export const handleSoftware = bot => {
-  bot.chatType('private').command('software', ctx => {
-    void ctx.reply(`<b>${header}</b>\n\n${text}`, {
-      parse_mode: 'HTML',
-      reply_markup: inlineKeyboard,
-    })
+export const showSoftware = ctx => {
+  if (ctx.callbackQuery.data !== 'software') {
+    if (ctx.callbackQuery.data === ctx.session.software) {
+      ctx.answerCallbackQuery('👍')
+
+      // Не редактируем сообщение при выборе выбранной программы.
+      return
+    }
+
+    ctx.session.software = ctx.callbackQuery.data
+  }
+
+  const checkByCondition = (text, software) =>
+    text + (ctx.session.software === software ? ' ✔️' : '')
+
+  const inlineKeyboard = new InlineKeyboard()
+    .text(checkByCondition('🤬 Агрессивный', 'aggressive'), 'aggressive')
+    .text(checkByCondition('😏 Оптимальный', 'optimal'), 'optimal')
+    .row()
+    .text(checkByCondition('😐 Осторожный', 'careful'), 'careful')
+    .text('◀️ Назад', 'back')
+
+  ctx.editMessageText(`<b>${header}</b>\n\n${text}`, {
+    parse_mode: 'HTML',
+    reply_markup: inlineKeyboard,
   })
 }

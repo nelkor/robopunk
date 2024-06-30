@@ -6,7 +6,7 @@ const spamControl = (ctx, next) => {
 
   ctx.session.lastMessageTime = now
 
-  if (timeFromLastMessage > PASS_DELAY) {
+  if (ctx.callbackQuery || timeFromLastMessage > PASS_DELAY) {
     next()
   }
 }
