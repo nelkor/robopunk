@@ -2,7 +2,8 @@ import { Bot } from 'grammy'
 import { config } from 'dotenv'
 
 import { useSpamControl } from '@/features/spam-control'
-import { useCallbackQuery } from '@/features/callback-query/index.js'
+import { useMessageRouter } from '@/features/message-router'
+import { useCallbackQuery } from '@/features/callback-query'
 
 import { withSession } from './session.js'
 
@@ -12,6 +13,7 @@ export const createBot = () => {
   const bot = withSession(new Bot(process.env.TELEGRAM_TOKEN))
 
   useSpamControl(bot)
+  useMessageRouter(bot)
   useCallbackQuery(bot)
 
   process.once('SIGINT', () => bot.stop())
