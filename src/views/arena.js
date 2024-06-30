@@ -1,6 +1,6 @@
 import { InlineKeyboard } from 'grammy'
 
-const inlineKeyboard = new InlineKeyboard().text('◀️ Назад', 'back')
+const inlineKeyboard = new InlineKeyboard().text('❌ Отменить', 'cancel')
 const header = 'Арена ⚔️'
 const text = '<b>Карапузик</b> 🤖 ожидает подбора соперника...'
 

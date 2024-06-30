@@ -1,6 +1,6 @@
 import { config } from 'dotenv'
 
-import { createBot } from '@/bot.js'
+import { createBot } from '@/app/bot.js'
 import { handleRobot } from '@/views/robot.js'
 import { handleArena } from '@/views/arena.js'
 import { handleSoftware } from '@/views/software.js'
